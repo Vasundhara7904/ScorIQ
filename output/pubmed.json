@@ -1,0 +1,21 @@
+[
+    {
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/38041827/",
+        "source_type": "pubmed",
+        "author": "Umberto Pensato, Sabina Cevoli, Giulia Pierangeli, Pietro Cortelli",
+        "published_date": "2023",
+        "language": "en",
+        "region": "Global",
+        "topic_tags": [
+            "migraine",
+            "headache",
+            "genetic",
+            "disease",
+            "prevalence"
+        ],
+        "trust_score": 0.73,
+        "content_chunks": [
+            "Migraine's astonishing prevalence and preserved genetic background contrast with the definition of a disease and the biological meaning of experiencing recurrent, severe headache attacks is still puzzling."
+        ]
+    }
+]

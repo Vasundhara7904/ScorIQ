@@ -1,0 +1,14 @@
+requests
+beautifulsoup4
+newspaper3k
+lxml
+lxml_html_clean
+langdetect
+keybert
+scikit-learn
+sentence-transformers
+flask
+youtube-transcript-api
+biopython
+transformers
+torch

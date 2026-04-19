@@ -1,0 +1,40 @@
+[
+    {
+        "source_url": "https://youtu.be/gRANhPtpuKc?si=j4o7_yjH6EjuRy_m",
+        "source_type": "youtube",
+        "author": "Varun Grover",
+        "published_date": "2026-04-11T05:22:27-07:00",
+        "language": "en",
+        "region": "India",
+        "topic_tags": [
+            "messi",
+            "jaao",
+            "ketchup",
+            "standup",
+            "anant"
+        ],
+        "trust_score": 0.6,
+        "content_chunks": [
+            "Messi in India || Standup Comedy by Varun Grover. When Anant Met Messi.LOVE, DEATH, and KETCHUP - my brand new show touring USA, UK, and Europe in April-June 2026. Aa jaao! All tickets at: https://linktr.ee/...."
+        ]
+    },
+    {
+        "source_url": "https://youtu.be/7I3G21RyARs?si=9rvmSB73B6Rwam-Z",
+        "source_type": "youtube",
+        "author": "CodeHead",
+        "published_date": "2026-03-24T08:00:13-07:00",
+        "language": "en",
+        "region": "Global",
+        "topic_tags": [
+            "codecrafters",
+            "programmer",
+            "coding",
+            "codehead",
+            "dev"
+        ],
+        "trust_score": 0.6,
+        "content_chunks": [
+            "How to reach your potential as a programmer. \ud83d\udc49 Try Supabase for FREE: https://supabase.plug.dev/BsEHaAT\ud83d\udc49Get 40% OFF CodeCrafters: https://app.codecrafters.io/join?via=codehead-01\ud83d\udc49Git gud at coding wi...."
+        ]
+    }
+]
