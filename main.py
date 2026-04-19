@@ -23,14 +23,14 @@ def process_url(url, source_type):
 
     if not raw_data:
         return None
-    print("RAW DATA:", raw_data)
+
     processed_data = process_content(raw_data)
     if processed_data is None:
         return {
              "error": "Processing failed",
             "debug_raw": raw_data  # 👈 helps debugging
         }
-    print("PROCESSED DATA:", processed_data)
+
     trust_score = calculate_trust_score(processed_data)
 
     return {

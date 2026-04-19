@@ -50,23 +50,34 @@ def detect_region(text, url):
 
 
 # 🧠 SUMMARY
-def generate_summary(text):
+def generate_summary(raw_data, topic_tags):
     try:
+        text = raw_data.get("content", "")
         if len(text.split()) < 30:
-            return "Content too short to summarize"
+            text = raw_data.get("description", "")
+            if not text:
+                return "This site doesn't have enough content to summarize."
 
-        # Use a more capable instruction-tuned transformer for human-like summaries
-        summarizer = pipeline(
-            "text2text-generation",
-            model="google/flan-t5-base"
-        )
+        # Reverting to the highly reliable abstractive model (distilbart)
+        summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+        
+        # Max length 120, min 40 ensures roughly 3-4 good sentences
+        raw_summary = summarizer(text[:1024], max_length=120, min_length=40, do_sample=False)
+        summary_text = raw_summary[0]['summary_text'].strip()
 
-        truncated_text = " ".join(text.split()[:400])
-        prompt = f"Read the following text. Write a 3 to 4 sentence summary of the text. Write it in the first person, as if you are a real person who just read the article and are summarizing it for a friend.\n\nText: {truncated_text}\n\nSummary:"
+        # Construct the requested conversational introduction
+        title = raw_data.get("title") or ""
+        tags_str = ", ".join(topic_tags[:3]) if topic_tags else "several topics"
+        
+        if title:
+            intro = f"This site tells you about '{title}' and explores concepts like {tags_str}. "
+        else:
+            intro = f"This site tells you about {tags_str}. "
 
-        summary = summarizer(prompt, max_length=150, min_length=40, do_sample=True, temperature=0.7)
+        # Combine into a seamless human-like summary
+        final_summary = intro + "Specifically, " + summary_text
 
-        return summary[0]['generated_text']
+        return final_summary
 
     except Exception as e:
         print("SUMMARY ERROR:", e)
@@ -75,6 +86,7 @@ def generate_summary(text):
     print("Loading summarizer model...")
     summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
     print("Summarizer loaded successfully")
+
 
 # 🚀 MAIN PROCESSOR (FIXED)
 def process_content(raw_data):
@@ -96,7 +108,7 @@ def process_content(raw_data):
         full_text = text + " " + (raw_data.get("description") or "")
         region = detect_region(full_text, raw_data.get("source_url", ""))
 
-        summary = generate_summary(text)
+        summary = generate_summary(raw_data, topic_tags)
 
         # ✅ FINAL RETURN (THIS WAS MISSING EARLIER)
         return {
