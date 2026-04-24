@@ -71,12 +71,12 @@ I extended the system with dynamic URL ingestion, enabling real-time scraping, p
 </p>
 
 <p align="center">
-  <img src="images/ui2.png" width="700"/><br>
-  <em>Figure 2: Processing Pipeline Output</em>
+  <img src="images/ui3.png" width="700"/><br>
+  <em>Figure 2: Final Summarization & Scoring</em>
 </p>
 
 <p align="center">
-  <img src="images/ui3.png" width="700"/><br>
+  <img src="images/ui2.png" width="700"/><br>
   <em>Figure 3: Final Summarization & Scoring</em>
 </p>
 
