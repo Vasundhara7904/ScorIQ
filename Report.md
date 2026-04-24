@@ -11,7 +11,7 @@ Instead of employing a single monolithic scraping logic, we utilize specific too
 ## 2. Topic Tagging Method
 Topic tagging is handled via an automated, machine-learning approach rather than simple term frequency. The pipeline utilizes **KeyBERT**, a minimal and easy-to-use keyword extraction technique that leverages BERT embeddings.
 
-The workflow is as follows:
+The workflow is as follows: 
 1. The scraped text (whether a blog article, video transcript, or medical abstract) is passed into the `all-MiniLM-L6-v2` transformer model.
 2. The model creates dense vector embeddings of the entire document.
 3. It then embeds individual words and n-grams from the text.
