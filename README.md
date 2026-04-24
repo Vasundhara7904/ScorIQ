@@ -1,57 +1,49 @@
-# ScorIQ: Web Scorer & Trust Analyzer
+# Web Scorer & Trust Analyzer
 
-ScorIQ is a powerful, multi-source data scraping and content trust scoring pipeline. It evaluates the credibility of web content across multiple platforms (Blogs, YouTube, and PubMed) and provides a beautifully designed dynamic web dashboard to view structured analytics and abstractive machine-generated summaries.
+## Overview
+This project is a multi-source data scraping and trust scoring pipeline. It dynamically extracts metadata and content from Blogs, YouTube, and PubMed, calculates a weighted Trust Score, and generates abstractive machine-learning summaries.
 
-## 🚀 Features
+## 1. Tools and Libraries Used
+- **Python**: Core programming language.
+- **Flask**: Framework used to serve the dynamic Glassmorphism web dashboard.
+- **BeautifulSoup4**: HTML parsing and scraping for general blog articles.
+- **yt-dlp & youtube-transcript-api**: Used to extract YouTube metadata and video transcripts.
+- **Biopython (Entrez)**: API toolkit used to search and fetch structured XML medical data from the NCBI PubMed database.
+- **HuggingFace Transformers (`sshleifer/distilbart-cnn-12-6`)**: Deep learning NLP model utilized for abstractive machine summarization.
+- **KeyBERT**: NLP library utilized to automatically extract the most relevant topic keywords.
+- **langdetect**: To detect the language of the scraped content (with custom fallbacks for Hinglish).
 
-- **Multi-Source Scraping**: Extract metadata and content seamlessly from YouTube videos, PubMed research articles, and general blog posts.
-- **Trust Scoring Algorithm**: Calculates a sophisticated Trust Score (0-100%) based on author credibility, citation count, domain authority, recency, and the presence of medical disclaimers.
-- **Abstractive AI Summarization**: Uses the highly reliable `sshleifer/distilbart-cnn-12-6` NLP model to act as a human analyst and generate concise, accurate 3-sentence summaries of the content in its own words.
-- **Automated Topic Tagging**: Extracts relevant keywords from the text using `KeyBERT`.
-- **Dynamic Web Dashboard**: A stunning, modern Glassmorphism UI built with Flask that allows you to paste a link and instantly view its Trust Score meter, metadata, and AI summary.
+## 2. Scraping Approach
+Our scraping architecture is highly modular, featuring dedicated scrapers for each source type:
+- **Blogs**: Uses `requests` and `BeautifulSoup4` to parse standard HTML paragraph tags (`<p>`) and `meta` tags for author/date extraction.
+- **YouTube**: Bypasses traditional scraping by leveraging `yt-dlp` for metadata (views, duration, upload date) and `youtube-transcript-api` to pull the actual spoken text transcript for content processing.
+- **PubMed**: Interacts directly with the official Entrez NCBI API to cleanly extract authors, publication dates, abstracts, and citation counts without relying on brittle HTML parsing.
 
-## 🛠️ Technology Stack
+## 3. Trust Score Design
+The Trust Score calculates the credibility of the source using a heuristic weighted function yielding a percentage (0-100%). The weights are dynamically assessed:
+- **Author Credibility (25%)**: Prioritizes recognized medical or academic institutions (e.g., clinics, universities).
+- **Citation Count (20%)**: Directly correlates with PubMed's citation indices (a highly cited paper achieves a maximum score).
+- **Domain Authority (20%)**: Heavily weights `.gov` and `.edu` domains (1.0), treats `youtube.com` as neutral (0.7), and penalizes standard `.com` blogs (0.5).
+- **Recency (20%)**: Content published within the last year scores highly, while content older than 5 years is penalized to ensure up-to-date information.
+- **Medical Disclaimer Presence (15%)**: Scans the text for legal disclaimers (e.g., "not a substitute for medical advice") which indicate a professional and cautious approach to health reporting.
 
-- **Backend**: Python, Flask
-- **Frontend**: HTML, CSS (Vanilla Glassmorphism UI)
-- **AI / NLP**: HuggingFace Transformers (`distilbart-cnn-12-6`), `KeyBERT`, `langdetect`
-- **Scraping Libraries**: `BeautifulSoup4`, `yt-dlp`, `youtube-transcript-api`, `Biopython` (Entrez)
+## 4. Limitations
+- **YouTube Transcripts**: The system relies on user-uploaded or auto-generated transcripts. If a video disables transcripts, the system must fall back to summarizing only the video description.
+- **JavaScript-Rendered Blogs**: Standard `BeautifulSoup` cannot execute client-side JavaScript. Blogs that dynamically load their content via React/Angular without SSR might fail to scrape.
+- **Language Bias**: The `distilbart` abstractive summarization model is trained primarily on English text. Non-English articles may yield lower-quality summaries or translation artifacts.
 
-## 📦 Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Vasundhara7904/ScorIQ.git
-   cd ScorIQ
-   ```
-
-2. Install the required dependencies:
+## 5. How to Run the Project
+1. **Install Dependencies**: Ensure you have Python installed, then run:
    ```bash
    pip install -r requirements.txt
    ```
-   *(Note: The AI summarization model relies on PyTorch and Transformers. The first run will automatically download the required model weights).*
-
-## 💻 Usage
-
-### Web Interface (Dynamic Upload)
-To start the dynamic web interface where you can analyze links in real-time:
-
-```bash
-python app.py
-```
-Then, open your browser and navigate to `http://localhost:5000`.
-
-### Batch Processing
-To run the scraper in batch mode and generate the static `blogs.json`, `pubmed.json`, and `youtube.json` output files:
-
-```bash
-python main.py
-```
-
-## 🧠 Trust Score Algorithm
-The Trust Score evaluates the reliability of a source using a weighted heuristic function of:
-- **Author Credibility**
-- **Citation Count**
-- **Domain Authority**
-- **Recency** (How recently the content was published)
-- **Medical Disclaimer Presence**
+2. **Run Batch Pipeline**: To scrape the hardcoded assignment links and generate the structured JSON file:
+   ```bash
+   python main.py
+   ```
+   *(This will create the dataset in the `output/` directory).*
+3. **Run Dynamic Web Dashboard**: To start the local Flask server and visually analyze custom links:
+   ```bash
+   python app.py
+   ```
+   *Navigate to `http://localhost:5000` in your browser.*

@@ -1,52 +1,58 @@
 from langdetect import detect
-from keybert import KeyBERT
+from datetime import datetime
 from transformers import pipeline
 
-model="Falconsai/text_summarization"
+from processing.tagging import generate_topic_tags
+from processing.chunking import chunk_content
 
-kw_model = KeyBERT(model="all-MiniLM-L6-v2")
 
 
 def detect_language(text):
+    text_lower = text.lower()
+    hinglish_words = [" hai ", " ki ", " mein ", " aur ", " kya ", " aa jaao", " bhai ", " hindi", " yaar "]
+    if any(w in text_lower for w in hinglish_words):
+        return "hi"
     try:
         return detect(text)
     except:
         return "unknown"
 
 
-def generate_topic_tags(text):
-    try:
-        keywords = kw_model.extract_keywords(text, top_n=5)
-        return [kw[0] for kw in keywords]
-    except:
-        return []
-
-
-def chunk_content(text, max_words=200):
-    try:
-        words = text.split()
-        return [" ".join(words[i:i + max_words]) for i in range(0, len(words), max_words)]
-    except:
-        return []
-
-
 # 🌍 REGION DETECTION
-def detect_region(text, url):
+def detect_region(text, url, language):
     text = text.lower()
 
-    if any(w in text for w in ["india", "mumbai", "delhi"]):
-        return "India"
-    if any(w in text for w in ["usa", "america", "california"]):
-        return "USA"
-    if any(w in text for w in ["uk", "london", "britain"]):
-        return "UK"
+    india_kws = ["india", "mumbai", "delhi", "bengaluru", "chennai", "pune", "inr"]
+    usa_kws = ["usa", "america", "california", "new york", "washington"]
+    uk_kws = ["uk", "london", "britain", "england"]
 
-    if ".in" in url:
+    if any(w in text for w in india_kws) or ".in" in url or language == "hi":
         return "India"
-    elif ".uk" in url:
+    if any(w in text for w in usa_kws):
+        return "USA"
+    if any(w in text for w in uk_kws) or ".uk" in url:
         return "UK"
 
     return "Global"
+
+# 📅 DATE FORMATTING
+def format_date(date_str):
+    if not date_str or date_str == "unknown":
+        return "Unknown"
+        
+    if len(date_str) == 8 and date_str.isdigit():
+        try:
+            return datetime.strptime(date_str, "%Y%m%d").strftime("%B %d, %Y")
+        except:
+            pass
+            
+    try:
+        if len(date_str) >= 10 and date_str[4] == '-' and date_str[7] == '-':
+            return datetime.strptime(date_str[:10], "%Y-%m-%d").strftime("%B %d, %Y")
+    except:
+        pass
+        
+    return date_str
 
 
 # 🧠 SUMMARY
@@ -106,7 +112,7 @@ def process_content(raw_data):
         content_chunks = chunk_content(text)
 
         full_text = text + " " + (raw_data.get("description") or "")
-        region = detect_region(full_text, raw_data.get("source_url", ""))
+        region = detect_region(full_text, raw_data.get("source_url", ""), language)
 
         summary = generate_summary(raw_data, topic_tags)
 
@@ -115,7 +121,7 @@ def process_content(raw_data):
             "source_url": raw_data.get("source_url"),
             "source_type": raw_data.get("source_type"),
             "author": raw_data.get("author") or "unknown",
-            "published_date": raw_data.get("published_date") or "unknown",
+            "published_date": format_date(raw_data.get("published_date") or "unknown"),
             "language": language,
             "region": region,
             "topic_tags": topic_tags,

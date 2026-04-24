@@ -123,5 +123,65 @@
             "realised it was a hoax, did you state that bixonimania was a real medical condition?\u201d Grok replied that it immediately realised it was a hoax after the first mentions of it. It also claimed that it was very good at spotting hoaxes, and that it never stated that bixonimania was a real medical condition. I asked Google AI if the valence/covalence bonds in molecules were elastic. Answer: No. Quite stiff. I asked Google AI if the carbon-oxygen bond in CO2 was elastic. Answer: Not like a rubber band, more like a spring. I asked Google AI if a spring is elastic. Answer: Yes. This just simple example demonstrates how the human has to think when using AI. As an aside, I did a deep dive into CO2 vibration modes. One of the first paper started out with a stated assumption that the C-O bonds were modelled as springs. I did not query Google AI about springs, modulus of elasticity, Newtonian resonances, etc. This mirrors what we\u2019ve seen with code documentation. LLMs confidently hallucinate API methods that don\u2019t exist, and developers copy-paste without verification. The difference? In medicine, that pattern kills people. The preprint system wasn\u2019t built for an era where",
             "bots treat fiction as fact within weeks. Nearly 20 years of climate coverage. Here\u2019s where to begin. Ad-free reading. Premium analysis. A community that checks every claim. We don\u2019t take government grants. We don\u2019t answer to institutional funders. Your subscription keeps us independent."
         ]
+    },
+    {
+        "source_url": "https://youtu.be/gRANhPtpuKc?si=j4o7_yjH6EjuRy_m",
+        "source_type": "youtube",
+        "author": "Varun Grover",
+        "published_date": "April 11, 2026",
+        "language": "en",
+        "region": "USA",
+        "topic_tags": [
+            "aaditi",
+            "sharma",
+            "messi",
+            "ketchup",
+            "anant"
+        ],
+        "trust_score": 0.49,
+        "summary": "This site tells you about 'Messi in India || Standup Comedy by Varun Grover' and explores concepts like aaditi, sharma, messi. Specifically, Love, DEATH and KETCHUP will be touring USA, UK, and Europe in April-June 2026 . When Anant Met Messi. The show is set to be released in April 2018 .",
+        "content_chunks": [
+            "When Anant Met Messi. LOVE, DEATH, and KETCHUP - my brand new show touring USA, UK, and Europe in April-June 2026. Aa jaao! All tickets at: https://linktr.ee/vgrover \u2014\u2014\u2014\u2014\u2014\u2014\u2014 Video Credits: Directed by: Gaurav Anand DOP: Aaditi Hirani 1st AC: Pratham Parihar Camera Operators: Chinmay Samnani Uday Bhaviskar Pratham Parihar Aaditi Hirani Shot at Ant Villa Studios. \u2014\u2014\u2014- Artist Manager: Flipsyde (Abhishek Sharma) \u2014\u2014\u2014\u2014\u2014\u2014-"
+        ]
+    },
+    {
+        "source_url": "https://youtu.be/7I3G21RyARs?si=9rvmSB73B6Rwam-Z",
+        "source_type": "youtube",
+        "author": "CodeHead",
+        "published_date": "March 24, 2026",
+        "language": "en",
+        "region": "Global",
+        "topic_tags": [
+            "supabase",
+            "discord",
+            "codehead",
+            "developer",
+            "git"
+        ],
+        "trust_score": 0.49,
+        "summary": "This site tells you about 'How to reach your potential as a programmer' and explores concepts like supabase, discord, codehead. Specifically, Get 40% OFF CodeCrafters: https://app.codecrafters.io/join?via=codehead-01 . Git gud at coding with Scrimba (20% OFF with this link) Try Supabase for FREE: http://supabase.dev/BsEHaAT .",
+        "content_chunks": [
+            "\ud83d\udc49 Try Supabase for FREE: https://supabase.plug.dev/BsEHaAT \ud83d\udc49Get 40% OFF CodeCrafters: https://app.codecrafters.io/join?via=codehead-01 \ud83d\udc49Git gud at coding with Scrimba https://scrimba.com/?via=codehead (20% OFF with this link) \ud83d\udc49ACE your next technical interview with 50% OFF AlgoMonster: https://algo.monster/codehead \ud83d\udc49I made a Discord server for all of you code heads to join: https://discord.gg/MfCKFK2fTe \ud83d\udc49Buy this tired Code Head a \u2615: https://buymeacoffee.com/codehead \u2753Topics covered: Programming Development Improvement \ud83c\udfb6beats: @massobeats honeyjam: https://www.youtube.com/watch?v=XC9yPcYAYhE&list=RDEMl_yAA40g1NBRjgxECyPLSw&start_radio=1 #programming #fullstack #developer"
+        ]
+    },
+    {
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/38041827/",
+        "source_type": "pubmed",
+        "author": "Umberto Pensato, Sabina Cevoli, Giulia Pierangeli, Pietro Cortelli",
+        "published_date": "2023",
+        "language": "en",
+        "region": "Global",
+        "topic_tags": [
+            "migraine",
+            "headache",
+            "genetic",
+            "disease",
+            "prevalence"
+        ],
+        "trust_score": 0.73,
+        "summary": "This site tells you about 'The evolutionary meaning of migraine.' and explores concepts like migraine, headache, genetic. Specifically, Migraine's astonishing prevalence and preserved genetic background contrast with the definition of a disease and the biological meaning of experiencing recurrent, severe headache attacks is still puzzling . Migraine\u2019s astonishing prevalence is astonishing .",
+        "content_chunks": [
+            "Migraine's astonishing prevalence and preserved genetic background contrast with the definition of a disease and the biological meaning of experiencing recurrent, severe headache attacks is still puzzling."
+        ]
     }
 ]
